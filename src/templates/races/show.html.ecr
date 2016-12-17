@@ -1,0 +1,18 @@
+<html>
+  <head>
+    <title>SpdRns</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="race">
+        <a href="/races/<%= race.id %>"><span class="race-id"><%= race.id %></span></a>
+        <span class="race-state"><%= race.state %></span>
+
+        <%= render2 "races/_race_actions.html" %>
+      </div>
+    </div>
+  </body>
+</html>

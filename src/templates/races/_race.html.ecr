@@ -1,0 +1,27 @@
+<div class="race">
+  <a href="/races/<%= race.id %>"><span class="race-id"><%= race.id %></span></a>
+  <%= race_state_label(race.state) %>
+  <span class="race-timer"><%= race.elapsed_time %></span>
+
+  <table class="race-members">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Role</th>
+        <th>State</th>
+        <th>Time</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%- race.members.each do |member| -%>
+        <tr>
+          <td><%= member.user.name %></td>
+          <td><%= member.role %></td>
+          <td><%= colored_icon_for_member_state(member.state) %></td>
+          <td><%= member.time || "--" %></td>
+        </tr>
+      <%- end -%>
+    </tbody>
+  </table>
+</div>

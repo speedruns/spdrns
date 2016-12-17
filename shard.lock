@@ -1,0 +1,30 @@
+version: 1.0
+shards:
+  expect:
+    github: dukex/expect.cr
+    commit: 17c31a0f42815cd914a630852bb2ee0da6a39dc0
+
+  kemal:
+    github: kemalcr/kemal
+    commit: ac8ec0a07b5929dc1656006a135e08a2a2732f5e
+
+  kilt:
+    github: jeromegn/kilt
+    version: 0.3.3
+
+  krout:
+    github: faultyserver/krout
+    commit: 0031ef83616b6e22e0500625db15d46b581c2cb8
+
+  multipart:
+    github: RX14/multipart.cr
+    version: 0.1.1
+
+  radix:
+    github: luislavena/radix
+    version: 0.3.5
+
+  spdrns:
+    github: speedruns/spdrns-crystal
+    commit: d79321f56303ab30c39097cb2ad457e9acdd3a9b
+

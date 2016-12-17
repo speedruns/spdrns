@@ -1,0 +1,5 @@
+<div class="race-actions">
+  <%- race.valid_actions.each do |action| -%>
+    <a href="<%= "/races/#{race_id}/#{action}" %>" class="btn"><%= action.to_s.capitalize %></a>
+  <%- end -%>
+</div>
