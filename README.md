@@ -1,22 +1,18 @@
-# web
+# spdrns.com
 
-TODO: Write a description here
-
-## Installation
-
-TODO: Write installation instructions here
+Source for http://spdrns.com. Simple web service for races following the SPDRNS protocol.
 
 ## Usage
 
-TODO: Write usage instructions here
+    crystal ./src/client.cr
 
 ## Development
 
-TODO: Write development instructions here
+(See contributing)
 
 ## Contributing
 
-1. Fork it ( https://github.com/[your-github-name]/web/fork )
+1. Fork it ( https://github.com/speedruns/spdrns.com/fork )
 2. Create your feature branch (git checkout -b my-new-feature)
 3. Commit your changes (git commit -am 'Add some feature')
 4. Push to the branch (git push origin my-new-feature)
@@ -24,4 +20,4 @@ TODO: Write development instructions here
 
 ## Contributors
 
-- [[your-github-name]](https://github.com/[your-github-name]) Jon - creator, maintainer
+- [faultyserver](https://github.com/faultyserver) Jon - creator, maintainer
