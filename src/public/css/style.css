@@ -28,7 +28,7 @@ body {
   margin-left: 0;
 }
 
-.race-id, .race-timer {
+.race-id {
   font-family: monospace;
 }
 
@@ -42,12 +42,44 @@ body {
   text-transform: uppercase;
 }
 
+.race-timer {
+  display: block;
+  font-family: monospace;
+  font-size: 24px;
+}
+
 
 .race-members {
+  border-collapse: collapse;
   min-width: 400px;
 }
 
   .race-members th {
     font-size: 12px;
+    text-align: left;
     text-transform: uppercase;
   }
+
+  .race-members th, .race-members td {
+    padding: 4px 6px;
+  }
+
+  .race-members tbody tr:nth-child(odd) {
+    background-color: #f7f7f7;
+  }
+
+  .race-members td {
+    border: none;
+  }
+
+  .race-members .member-state {
+    text-align: center;
+  }
+
+.race-actions {
+  margin-top: 12px;
+}
+
+.ready {
+  color: green;
+}

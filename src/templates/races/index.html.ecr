@@ -4,12 +4,15 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/css/style.css">
+
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script src="/js/app.js"></script>
   </head>
 
   <body>
     <div class="container">
       <div class="pull-right">
-        <a href="/races/create" class="btn">Create a Race!</a>
+        <a href="/races/create" data-method="post" class="btn">Create a Race!</a>
       </div>
 
       <%- races.each do |(id, race)| -%>
