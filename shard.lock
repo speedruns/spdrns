@@ -1,30 +1,26 @@
 version: 1.0
 shards:
-  expect:
-    github: dukex/expect.cr
-    commit: 17c31a0f42815cd914a630852bb2ee0da6a39dc0
+  crecto:
+    github: crecto/crecto
+    version: 0.6.0
 
-  kemal:
-    github: kemalcr/kemal
-    commit: ac8ec0a07b5929dc1656006a135e08a2a2732f5e
+  db:
+    github: crystal-lang/crystal-db
+    version: 0.4.2
 
-  kilt:
-    github: jeromegn/kilt
-    version: 0.3.3
+  micrate:
+    github: juanedi/micrate
+    version: 0.3.0
 
-  krout:
-    github: faultyserver/krout
-    commit: 0031ef83616b6e22e0500625db15d46b581c2cb8
+  pg:
+    github: will/crystal-pg
+    version: 0.13.3
 
-  multipart:
-    github: RX14/multipart.cr
-    version: 0.1.1
+  seg:
+    github: soveran/seg
+    commit: 82e39885ae67a270c0e0830a842936990a77563e
 
-  radix:
-    github: luislavena/radix
-    version: 0.3.5
-
-  spdrns:
-    github: speedruns/spdrns-crystal
-    commit: d79321f56303ab30c39097cb2ad457e9acdd3a9b
+  toro:
+    github: soveran/toro
+    version: 0.4.0
 

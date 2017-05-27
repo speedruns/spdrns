@@ -1,123 +1,117 @@
-class RacesController
-  class DB
-    @@races : Hash(String, Race) = {} of String => Race
-    @@users : Hash(String, User) = {} of String => User
-
-    def self.races
-      @@races ||= {} of String => Race
+class Races < Toro::Router
+  def routes
+    get do
+      races = Repo.all(Race, preload: [:memberships, :users])
+      html "src/templates/races/index.html"
     end
 
-    def self.users
-      @@users ||= {} of String => User
-    end
-  end
+    on "create" do
+      post do
+        race = Race.new
+        changeset = Repo.insert(race)
 
-  def self.index(env)
-    env.response.content_type = "text/html"
-
-    races = DB.races
-    render2("races/index.html")
-  end
-
-  def self.create(env)
-    env.response.content_type = "text/html"
-
-    # Guarantee a locally-unique key
-    id = SecureRandom.hex(4)
-    while DB.races.has_key?(id)
-      id = SecureRandom.hex(4)
+        redirect "/races"
+      end
     end
 
-    race = Race.new(id)
-    DB.races[race.id] = race
+    on :id do
+      race = Repo.get!(Race, inbox[:id], Query.preload(:memberships))
 
-    env.redirect("/races")
-  end
+      get do
+        html "src/templates/races/show.html"
+      end
 
-  def self.show(env)
-    env.response.content_type = "text/html"
-    race_id = env.params.url["id"]
-    race = DB.races[race_id]
+      on "join" do
+        on :username do
+          post do
+            user = Repo.get_by!(User, name: inbox[:username])
+            membership = Membership.participant(user, race)
+            Repo.insert(membership)
 
-    render2("races/show.html")
-  end
+            redirect "src/templates/races/#{race.id}"
+          end
+        end
+      end
 
-  def self.join(env)
-    env.response.content_type = "text/html"
-    race_id = env.params.url["id"]
-    user_name = env.params.url["username"]
+      on "ready" do
+        on :username do
+          post do
+            user = Repo.get_by!(User, name: inbox[:username])
+            membership = Repo.get_by!(Membership, user_id: user.id, race_id: race.id)
+            membership.ready
+            Repo.update(membership)
 
-    race = DB.races[race_id]
-    user = DB.users[user_name]? || (DB.users[user_name] = User.new(user_name))
-    user.register(race)
-    user.ready(race)
+            redirect "/races/#{race.id}"
+          end
+        end
+      end
 
-    env.redirect("/races/#{race.id}")
-  end
+      on "done" do
+        on :username do
+          post do
+            user = Repo.get_by!(User, name: inbox[:username])
+            membership = Repo.get_by!(Membership, user_id: user.id, race_id: race.id)
+            membership.done
+            Repo.update(membership)
 
-  def self.done(env)
-    env.response.content_type = "text/html"
-    race_id = env.params.url["id"]
-    user_name = env.params.url["username"]
+            redirect "/races/#{race.id}"
+          end
+        end
+      end
 
-    race = DB.races[race_id]
-    user = DB.users[user_name]
-    user.done(race)
+      on "open" do
+        post do
+          race.open
+          Repo.update(race)
 
-    env.redirect("/races/#{race.id}")
-  end
+          redirect "/races/#{race.id}"
+        end
+      end
 
-  def self.open(env)
-    env.response.content_type = "text/html"
-    race_id = env.params.url["id"]
-    race = DB.races[race_id]
+      on "close" do
+        post do
+          race.close
+          Repo.update(race)
 
-    race.open
-    env.redirect("/races/#{race.id}")
-  end
+          redirect "/races/#{race.id}"
+        end
+      end
 
-  def self.close(env)
-    env.response.content_type = "text/html"
-    race_id = env.params.url["id"]
-    race = DB.races[race_id]
+      on "start" do
+        post do
+          race.start
+          Repo.update(race)
 
-    race.close
-    env.redirect("/races/#{race.id}")
-  end
+          redirect "/races/#{race.id}"
+        end
+      end
 
-  def self.start(env)
-    env.response.content_type = "text/html"
-    race_id = env.params.url["id"]
-    race = DB.races[race_id]
+      on "pause" do
+        post do
+          race.pause
+          Repo.update(race)
 
-    race.start
-    env.redirect("/races/#{race.id}")
-  end
+          redirect "/races/#{race.id}"
+        end
+      end
 
-  def self.pause(env)
-    env.response.content_type = "text/html"
-    race_id = env.params.url["id"]
-    race = DB.races[race_id]
+      on "finish" do
+        post do
+          race.finish
+          Repo.update(race)
 
-    race.pause
-    env.redirect("/races/#{race.id}")
-  end
+          redirect "/races/#{race.id}"
+        end
+      end
 
-  def self.finish(env)
-    env.response.content_type = "text/html"
-    race_id = env.params.url["id"]
-    race = DB.races[race_id]
+      on "cancel" do
+        post do
+          race.cancel
+          Repo.update(race)
 
-    race.finish
-    env.redirect("/races/#{race.id}")
-  end
-
-  def self.cancel(env)
-    env.response.content_type = "text/html"
-    race_id = env.params.url["id"]
-    race = DB.races[race_id]
-
-    race.cancel
-    env.redirect("/races/#{race.id}")
+          redirect "/races/#{race.id}"
+        end
+      end
+    end
   end
 end

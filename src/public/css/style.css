@@ -51,7 +51,7 @@ body {
 
 .race-members {
   border-collapse: collapse;
-  min-width: 400px;
+  width: 480px;
 }
 
   .race-members th {

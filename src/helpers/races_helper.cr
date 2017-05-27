@@ -4,10 +4,9 @@ end
 
 def colored_icon_for_member_state(member_state)
   case member_state
-  when Membership::State::Ready
+  when "READY"
     %(<i class="fa fa-check ready"></i>)
-  when Membership::State::Ready
   else
-    "Nope"
+    member_state
   end
 end

@@ -1,0 +1,25 @@
+<html>
+  <head>
+    <title>SpdRns</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script src="/js/app.js"></script>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="pull-right">
+        <a href="/users/signup" class="btn">Sign up</a>
+      </div>
+
+      <ul>
+        <%- users.each do |user| -%>
+          <li><%-= user.name -%> has been in <%-= user.memberships.size %> races</li>
+        <%- end -%>
+      </ul>
+    </div>
+  </body>
+</html>

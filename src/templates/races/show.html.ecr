@@ -2,17 +2,16 @@
   <head>
     <title>SpdRns</title>
 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/css/style.css">
+
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script src="/js/app.js"></script>
   </head>
 
   <body>
     <div class="container">
-      <div class="race">
-        <a href="/races/<%= race.id %>"><span class="race-id"><%= race.id %></span></a>
-        <span class="race-state"><%= race.state %></span>
-
-        <%= render2 "races/_race_actions.html" %>
-      </div>
+      <%- html "src/templates/races/_race.html" -%>
     </div>
   </body>
 </html>

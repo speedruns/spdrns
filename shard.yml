@@ -1,19 +1,20 @@
 name: spdrns
 version: 0.1.0
-crystal: 0.20.1
+crystal: 0.22.0
 license: MIT
 authors:
   - Jon <jonegeland@gmail.com>
 
 targets:
   spdrns:
-    main: src/client.cr
+    main: src/spdrns.cr
 
 dependencies:
-  spdrns:
-    github: speedruns/spdrns-crystal
-  kemal:
-    github: kemalcr/kemal
-    branch: master
-  krout:
-    github: faultyserver/krout
+  micrate:
+    github: juanedi/micrate
+  pg:
+    github: will/crystal-pg
+  crecto:
+    github: crecto/crecto
+  toro:
+    github: soveran/toro

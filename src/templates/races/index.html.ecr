@@ -15,8 +15,8 @@
         <a href="/races/create" data-method="post" class="btn">Create a Race!</a>
       </div>
 
-      <%- races.each do |(id, race)| -%>
-        <%-= render2 "races/_race.html" -%>
+      <%- races.each do |race| -%>
+        <%- html "src/templates/races/_race.html" -%>
       <%- end -%>
     </div>
   </body>
