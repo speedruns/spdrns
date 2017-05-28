@@ -12,6 +12,13 @@
   <body>
     <div class="container">
       <div class="pull-right">
+        <%- if current_user? -%>
+          Hello, <%= current_user.name %>
+          <a href="/logout" data-method="post" class="btn">Logout</a>
+        <%- else -%>
+          <%- html "src/templates/sessions/_form.html" -%>
+        <%- end -%>
+
         <a href="/races/create" data-method="post" class="btn">Create a Race!</a>
       </div>
 
@@ -20,4 +27,5 @@
       <%- end -%>
     </div>
   </body>
+
 </html>

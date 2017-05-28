@@ -1,4 +1,5 @@
 require "toro"
+require "session"
 
 require "./repo"
 
@@ -6,9 +7,10 @@ require "./models/*"
 require "./helpers/*"
 
 
+require "./controller"
 require "./controllers/*"
 
-class App < Toro::Router
+class App < Controller
   def routes
     on "races" do
       mount Races
@@ -17,10 +19,15 @@ class App < Toro::Router
     on "users" do
       mount Users
     end
+
+    mount Sessions
   end
 end
 
+session_handler = Session::Handler(Hash(String, String)).new(secret: "SUPERSECRET")
+
 App.run("0.0.0.0", 3000, [
   HTTP::LogHandler.new,
-  HTTP::StaticFileHandler.new("src/public/")
+  HTTP::StaticFileHandler.new("src/public/"),
+  session_handler
 ])

@@ -24,7 +24,7 @@
           <td class="member-time"><%= participant.time || "--" %></td>
           <td>
             <%- if participant.state == Membership::State::REGISTERED -%>
-              <a href="<%= "/races/#{race.id}/ready/#{user.name}" %>" data-method="post" class="btn">Ready</a>
+              <a href="<%= "/races/#{race.id}/ready" %>" data-method="post" class="btn">Ready</a>
             <%- end -%>
           </td>
         </tr>

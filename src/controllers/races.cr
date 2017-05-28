@@ -1,4 +1,4 @@
-class Races < Toro::Router
+class Races < Controller
   def routes
     get do
       races = Repo.all(Race, preload: [:memberships, :users])
@@ -22,40 +22,36 @@ class Races < Toro::Router
       end
 
       on "join" do
-        on :username do
-          post do
-            user = Repo.get_by!(User, name: inbox[:username])
-            membership = Membership.participant(user, race)
-            Repo.insert(membership)
+        post do
+          assert_user_logged_in
+          membership = Membership.participant(current_user, race)
+          Repo.insert(membership)
 
-            redirect "src/templates/races/#{race.id}"
-          end
+          redirect "src/templates/races/#{race.id}"
         end
       end
 
       on "ready" do
-        on :username do
-          post do
-            user = Repo.get_by!(User, name: inbox[:username])
-            membership = Repo.get_by!(Membership, user_id: user.id, race_id: race.id)
-            membership.ready
-            Repo.update(membership)
+        post do
+          assert_user_logged_in
 
-            redirect "/races/#{race.id}"
-          end
+          membership = Repo.get_by!(Membership, user_id: current_user.id, race_id: race.id)
+          membership.ready
+          Repo.update(membership)
+
+          redirect "/races/#{race.id}"
         end
       end
 
       on "done" do
-        on :username do
-          post do
-            user = Repo.get_by!(User, name: inbox[:username])
-            membership = Repo.get_by!(Membership, user_id: user.id, race_id: race.id)
-            membership.done
-            Repo.update(membership)
+        post do
+          assert_user_logged_in
 
-            redirect "/races/#{race.id}"
-          end
+          membership = Repo.get_by!(Membership, user_id: current_user.id, race_id: race.id)
+          membership.done
+          Repo.update(membership)
+
+          redirect "/races/#{race.id}"
         end
       end
 

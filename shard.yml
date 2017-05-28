@@ -18,3 +18,5 @@ dependencies:
     github: crecto/crecto
   toro:
     github: soveran/toro
+  session:
+    github: porras/session

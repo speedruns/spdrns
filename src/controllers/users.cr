@@ -1,9 +1,4 @@
-class Users < Toro::Router
-  def form_params
-    body_str = context.request.body.try(&.gets_to_end) || ""
-    @parsed_params ||= HTTP::Params.parse(body_str)
-  end
-
+class Users < Controller
   def routes
     get do
       users = Repo.all(User, Query.new.preload(:memberships))

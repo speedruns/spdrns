@@ -31,7 +31,7 @@ class Race < Crecto::Model
     when State::CREATED
       [:open, :cancel]
     when State::OPEN
-      [:close]
+      [:join, :close]
     when State::CLOSED
       [:start, :cancel]
     when State::STARTED

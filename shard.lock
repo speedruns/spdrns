@@ -20,6 +20,10 @@ shards:
     github: soveran/seg
     commit: 82e39885ae67a270c0e0830a842936990a77563e
 
+  session:
+    github: porras/session
+    commit: c2f08cea0db2359242fe19ba5b469add7485a574
+
   toro:
     github: soveran/toro
     version: 0.4.0
